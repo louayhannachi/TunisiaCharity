@@ -27,16 +27,15 @@ public class ReclamationService implements IReclamationService {
     public void addReclamation(Reclamation reclamation) {
 
         try {
-            String query = "INSERT INTO `reclamation` VALUES (null, ?, ?, ?,? , ?);";
+            String query = "INSERT INTO `reclamation` VALUES (null, ?, ?, ?,? );";
 
             PreparedStatement ps = connection.prepareStatement(query);
 
             //ps.setInt(1,reclamation.getId());
             ps.setInt(1,reclamation.getIduser());
             ps.setInt(2,reclamation.getIdobjet());
-            ps.setString(3,reclamation.getDescription());
-            ps.setString(4,reclamation.getRaison());
-            ps.setString(5,reclamation.getTypeobjet());
+            ps.setInt(3,reclamation.getIdtr());
+            ps.setDate(4, (Date) reclamation.getDate());
 
             System.out.println(ps);
             ps.executeUpdate();
@@ -53,18 +52,20 @@ public class ReclamationService implements IReclamationService {
     public void updateReclamation( Reclamation reclamation) {
         try {
       String query= "UPDATE `reclamation` SET" +
+              "`iduser` = ?, "+
               "`idobjet` = ?, " +
-              "`description` = ?, " +
-              "`raison` = ?, " +
-              "`typeobjet`  =? " +
+              "`idtr` = ?, " +
+              "`date` = ? " +
+
               "WHERE `reclamation`.`idrec` = ?;";
 
 
             PreparedStatement   ps = connection.prepareStatement(query);
-            ps.setInt(1,reclamation.getIdobjet());
-            ps.setString(2,reclamation.getDescription());
-            ps.setString(3,reclamation.getRaison());
-            ps.setString(4,reclamation.getTypeobjet());
+            ps.setInt(1,reclamation.getIduser());
+            ps.setInt(2,reclamation.getIdobjet());
+            ps.setInt(3,reclamation.getIdtr());
+            ps.setDate(4, (Date) reclamation.getDate());
+
             ps.setInt(5,reclamation.getId());
 
 
@@ -97,8 +98,8 @@ public class ReclamationService implements IReclamationService {
     }
 
     @Override
-    public List<Reclamation> getReclamations() {
-        List<Reclamation> listReclamations = new ArrayList<>();
+    public ArrayList<Reclamation> getReclamations() {
+        ArrayList<Reclamation> listReclamations = new ArrayList<>();
         try {
         String query = "select * from `reclamation`;";
 
@@ -127,9 +128,8 @@ public class ReclamationService implements IReclamationService {
         reclamation.setId(rs.getInt(1));
         reclamation.setIduser(rs.getInt(2));
         reclamation.setIdobjet(rs.getInt(3));
-        reclamation.setDescription(rs.getString(4));
-        reclamation.setRaison(rs.getString(5));
-        reclamation.setTypeobjet(rs.getString(6));
+        reclamation.setIdtr(rs.getInt(4));
+        reclamation.setDate(rs.getDate(5));
     }
 
     @Override
