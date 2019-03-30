@@ -35,7 +35,7 @@ public class ReclamationService implements IReclamationService {
             ps.setInt(1,reclamation.getIduser());
             ps.setInt(2,reclamation.getIdobjet());
             ps.setInt(3,reclamation.getIdtr());
-            ps.setDate(4, (Date) reclamation.getDate());
+            ps.setTimestamp(4, new Timestamp(reclamation.getDate().getTime()));
 
             System.out.println(ps);
             ps.executeUpdate();
@@ -64,7 +64,7 @@ public class ReclamationService implements IReclamationService {
             ps.setInt(1,reclamation.getIduser());
             ps.setInt(2,reclamation.getIdobjet());
             ps.setInt(3,reclamation.getIdtr());
-            ps.setDate(4, (Date) reclamation.getDate());
+            ps.setTimestamp(4, new Timestamp(reclamation.getDate().getTime()));
 
             ps.setInt(5,reclamation.getId());
 

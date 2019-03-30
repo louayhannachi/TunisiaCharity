@@ -52,4 +52,15 @@ public class  Reclamation {
     public void setDate(Date date) {
         this.date = date;
     }
+
+    @Override
+    public String toString() {
+        return "Reclamation{" +
+                "id=" + id +
+                ", iduser=" + iduser +
+                ", idobjet=" + idobjet +
+                ", idtr=" + idtr +
+                ", date=" + date +
+                '}';
+    }
 }

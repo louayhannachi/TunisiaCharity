@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Date;
 
 
 public class ReclamationTest extends Application {
@@ -39,6 +40,7 @@ public class ReclamationTest extends Application {
 
     public static void main(String[] args) {
         launch(args);
+
         System.out.println("***************");
 
     }
